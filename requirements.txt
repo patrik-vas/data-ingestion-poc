@@ -1,0 +1,53 @@
+# boto3==1.35.36
+# botocore==1.35.36
+click==8.1.7
+credstash==1.17.1
+django-iam-dbauth==0.2.0
+#cryptography==42.0.8
+Django==4.2.11
+django-admin-numeric-filter==0.1.9
+django-admin-sortable2==2.1.10
+django-ajax-selects==2.1.0
+django-axes==5.26.0
+django-constance==2.9.1
+django-debug-toolbar==3.5.0
+django-environ==0.4.5
+django-filter==21.1
+django-localflavor==4.0
+django-mysql==4.12.0
+django-nested-admin==4.0.2
+django-picklefield==3.0.1
+django-richtextfield==1.6.1
+django-sekizai==2.0.0
+django-storages==1.11.1
+django-two-factor-auth @ git+https://github.com/jazzband/django-two-factor-auth@0c31bbf9f06038c80e8f58e671453af1d2c62414
+djangorestframework==3.15.1
+mysqlclient==2.2.4
+nameparser==1.1.3
+newrelic==8.0.0.179
+openpyxl==3.1.5
+phonenumbers==8.10.12
+pillow==10.2.0
+#pylint==3.3.4
+PyMySQL==1.1.0
+PyPDF2==1.27.5
+python-dateutil==2.9.0.post0
+python-pptx==0.6.21
+reportlab==4.2.2
+requests==2.32.3
+# s3transfer==0.11.2
+slack-sdk==3.33.3
+soupsieve==2.6
+sqlparse==0.5.1
+stack-data==0.6.3
+tableauserverclient==0.34
+watchtower==3.3.1
+xhtml2pdf==0.2.16
+setuptools==75.8.0
+xlrd==2.0.1
+XlsxWriter==3.2.2
+xlwt==1.3.0
+zappa==0.59.0
+python-gnupg==0.5.4
+zcrmsdk==3.1.0
+mysql-connector-python==9.1.0
