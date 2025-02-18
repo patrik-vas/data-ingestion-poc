@@ -10,22 +10,28 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)  # You can adjust the logging level
 
 
+
+def setting_core_data_env(client):
+    # Setting minimum necessary env variables to run core-data project
+    os.environ.setdefault("AWS_SECRET_MANAGER", "int/scripta-core-data")
+    os.environ.setdefault("DJANGO_UPLOAD_DIR", "upload/master_prod/")
+    os.environ.setdefault("DJANGO_MASTER_SETTINGS", "master_integration_settings")
+    os.environ.setdefault("DJANGO_LAMBDA_SETTINGS", "lambda_int_settings")
+    os.environ.setdefault(
+        "AWS_SSL_CERTIFICATE",
+        "/usr/local/airflow/dags/scripta-core-data-management/v3/certificate/us-east-1-bundle.pem",
+    )
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lambda_int_settings")
+    os.environ.setdefault("AWS_DEFAULT_REGION", "us-east-1")
+    os.environ.setdefault("DJANGO_ALLOWED_HOSTS", "*")
+    os.environ.setdefault("DATABASE_NAME", client)
+
+
 def setup_django_for_airflow(client):
     try:
         # Add Django project root to path
         sys.path.append("/usr/local/airflow/dags/scripta-core-data-management/v3")
-        os.environ.setdefault("AWS_SECRET_MANAGER", "int/scripta-core-data")
-        os.environ.setdefault("DJANGO_UPLOAD_DIR", "upload/master_prod/")
-        os.environ.setdefault("DJANGO_MASTER_SETTINGS", "master_integration_settings")
-        os.environ.setdefault("DJANGO_LAMBDA_SETTINGS", "lambda_int_settings")
-        os.environ.setdefault(
-            "AWS_SSL_CERTIFICATE",
-            "/usr/local/airflow/dags/scripta-core-data-management/v3/certificate/us-east-1-bundle.pem",
-        )
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lambda_int_settings")
-        os.environ.setdefault("AWS_DEFAULT_REGION", "us-east-1")
-        os.environ.setdefault("DJANGO_ALLOWED_HOSTS", "*")
-        os.environ.setdefault("DATABASE_NAME", client)
+        setting_core_data_env(client)
 
         # Log Django setup process
         logger.info("Setting up Django...")
@@ -34,6 +40,8 @@ def setup_django_for_airflow(client):
         from django.apps import apps
         from django.conf import settings
 
+        # core data logging have a conflict with Airflow logging
+        # for a workaround the core-data logging settings are turned off
         settings.LOGGING_CONFIG = None
         if not apps.ready:
             django.setup()
